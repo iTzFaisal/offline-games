@@ -1,0 +1,318 @@
+/* Game Page Styles */
+.game-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+}
+
+/* Game Header */
+.game-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    padding-top: 3rem;
+}
+
+.game-header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* Theme Toggle Button - Game Page */
+.game-header .theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.back-button {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.back-button:hover {
+    background: var(--primary-color);
+    color: var(--background-start);
+}
+
+/* Score Board */
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background: var(--card-background);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.score-label {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.game-select {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background: var(--card-background);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.game-select:hover,
+.game-select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+.game-select option {
+    background: var(--card-background);
+    color: var(--text-color);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-dark);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+.btn-primary:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Status Message */
+.status-message {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    aspect-ratio: 1;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 0.5rem;
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+}
+
+.cell {
+    background: var(--card-background);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    min-height: 80px;
+}
+
+.cell:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: var(--background-start);
+    transform: scale(1.02);
+}
+
+.cell:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+    z-index: 1;
+}
+
+.cell:disabled {
+    cursor: default;
+}
+
+.cell.winner {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-start);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(80, 227, 194, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 5px rgba(80, 227, 194, 0.3);
+    }
+}
+
+/* Cell values */
+.cell:empty::before {
+    content: '';
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 0.75rem;
+    }
+
+    .game-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .score-board {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .score-item {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .game-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .control-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .game-select {
+        flex-grow: 1;
+    }
+
+    .status-message {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .game-board {
+        gap: 0.375rem;
+        padding: 0.375rem;
+    }
+
+    .cell {
+        font-size: 2rem;
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cell {
+        font-size: 1.5rem;
+        min-height: 50px;
+    }
+}
+
+/* Keyboard Focus Styling */
+.cell:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+/* Accessibility - High Contrast Mode */
+@media (prefers-contrast: high) {
+    .cell {
+        border-width: 3px;
+    }
+
+    .btn-primary {
+        border: 2px solid var(--text-color);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .cell.winner {
+        animation: none;
+        background: var(--secondary-color);
+        color: var(--background-start);
+    }
+}
