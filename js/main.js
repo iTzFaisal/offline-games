@@ -8,15 +8,13 @@ const gameRegistry = {
         name: 'Tic-Tac-Toe',
         description: 'Classic 3x3 strategy game. Play against AI or a friend locally!',
         path: 'games/tictactoe.html'
+    },
+    snake: {
+        id: 'snake',
+        name: 'Snake',
+        description: 'Guide the snake to eat food and grow longer. Avoid walls and yourself! 10 levels of increasing difficulty.',
+        path: 'games/snake.html'
     }
-    // Add more games here in the future
-    // Example:
-    // snake: {
-    //     id: 'snake',
-    //     name: 'Snake',
-    //     description: 'Guide the snake to eat food and grow longer.',
-    //     path: 'games/snake.html'
-    // }
 };
 
 /**

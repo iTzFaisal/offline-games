@@ -5,19 +5,21 @@ TBD - created by archiving change add-offline-games-website. Update Purpose afte
 ## Requirements
 ### Requirement: Homepage listing available games
 
-The system SHALL provide a homepage listing available games.
+The system SHALL provide a homepage listing available games using retro arcade styling.
 
 #### Scenario: User visits the website
-- **Given** a user navigates to the website root
-- **When** the page loads
-- **Then** a homepage is displayed showing all available games
-- **And** each game is displayed as a card with name, description, and "Play" button
+- **WHEN** a user navigates to the website root
+- **THEN** a homepage is displayed showing all available games
+- **AND** each game is displayed as a card with neon cyan border and glow effect
+- **AND** game titles use Press Start 2P font
+- **AND** game descriptions use VT323 font
+- **AND** the background is deep arcade black (#0a0a12)
 
 #### Scenario: User clicks Play on a game
-- **Given** the homepage is displayed
-- **When** the user clicks the "Play" button for a game
-- **Then** the user is navigated to that game's page
-- **And** the game interface is displayed
+- **WHEN** the user clicks the "Play" button for a game
+- **THEN** the user is navigated to that game's page
+- **AND** a click sound effect plays (if not muted)
+- **AND** the button hover effect activates before navigation
 
 ### Requirement: Tic-Tac-Toe game board
 
@@ -102,35 +104,31 @@ The system SHALL provide three AI difficulty levels.
 
 ### Requirement: Score tracking and persistence
 
-The system SHALL track and persist game scores.
+The system SHALL track and persist game scores using appropriate scoring models for each game type.
 
-#### Scenario: Scores are saved after each game
-- **Given** a game has ended
-- **When** the game concludes (win, lose, or draw)
-- **Then** the result is saved to localStorage
-- **And** the score counter is updated
+#### Scenario: Competitive game scores are saved
+- **GIVEN** a game uses competitive scoring mode (e.g., Tic-Tac-Toe)
+- **WHEN** the game concludes (win, lose, or draw)
+- **THEN** the result is saved to localStorage with keys for wins, losses, and draws
+- **AND** the score counter is updated on screen
 
-#### Scenario: Scores persist across sessions
-- **Given** a user has played games previously
-- **When** the user returns to the game page
-- **Then** previous scores are loaded from localStorage
-- **And** the score display reflects historical results
-
-#### Scenario: User views current scores
-- **Given** the user is on the Tic-Tac-Toe page
-- **When** the page loads
-- **Then** the score display shows: Wins / Losses / Draws
+#### Scenario: High score game saves best score
+- **GIVEN** a game uses high score mode (e.g., Snake)
+- **WHEN** the game ends
+- **THEN** the final score is compared to the stored high score
+- **AND** if the final score is higher, it becomes the new high score
+- **AND** the high score is saved to localStorage with key 'games_highscore_<gameid>'
 
 ### Requirement: Responsive mobile design
 
-The system SHALL be responsive and work on mobile devices.
+The system SHALL be responsive and work on mobile devices with reduced visual effects.
 
 #### Scenario: User accesses site on mobile
-- **Given** a user accesses the site on a mobile device
-- **When** the page loads
-- **Then** the layout adapts to the smaller screen
-- **And** the game board scales appropriately
-- **And** all controls are touch-friendly
+- **WHEN** a user accesses the site on a mobile device (max-width 768px)
+- **THEN** the layout adapts to the smaller screen
+- **AND** glow effects use reduced intensity for battery life
+- **AND** all touch targets are at least 44x44 pixels
+- **AND** the game board or canvas scales appropriately
 
 ### Requirement: Game reset functionality
 
@@ -152,107 +150,26 @@ The system SHALL provide navigation back to homepage.
 - **Then** the user is returned to the homepage
 - **And** all game pages are available from the homepage
 
-### Requirement: Light and dark theme support
+### Requirement: Mute control in header
 
-The system SHALL provide light and dark theme options.
+The system SHALL provide a sound mute toggle button on all pages.
 
-#### Scenario: Website loads with system preference
-- **Given** a user has not manually set a theme preference
-- **When** the user visits the website
-- **Then** the theme matches the user's system preference (light or dark mode)
-- **And** the theme is applied immediately on page load
+#### Scenario: Mute button is visible in header
+- **WHEN** any page loads
+- **THEN** a mute toggle button is visible in the header
+- **AND** the button shows a speaker icon when sounds are enabled
+- **AND** the button shows a muted speaker icon when sounds are disabled
+- **AND** the button uses neon magenta styling matching the retro theme
 
-#### Scenario: Website applies dark theme
-- **Given** the dark theme is active
-- **When** the user views any page
-- **Then** dark backgrounds and light text are displayed
-- **And** all UI elements use dark theme colors
+#### Scenario: Mute button is accessible
+- **WHEN** a user navigates with keyboard
+- **THEN** the mute button can be focused with Tab key
+- **AND** the button can be activated with Enter or Space key
+- **AND** the button has an appropriate ARIA label ("Mute sounds" or "Unmute sounds")
 
-#### Scenario: Website applies light theme
-- **Given** the light theme is active
-- **When** the user views any page
-- **Then** light backgrounds and dark text are displayed
-- **And** all UI elements use light theme colors
-
-### Requirement: Manual theme override
-
-The system SHALL allow users to manually override the system theme preference.
-
-#### Scenario: User manually selects light theme
-- **Given** the user is on any page
-- **When** the user clicks the theme toggle button to select light theme
-- **Then** the light theme is applied immediately
-- **And** the preference overrides the system theme
-
-#### Scenario: User manually selects dark theme
-- **Given** the user is on any page
-- **When** the user clicks the theme toggle button to select dark theme
-- **Then** the dark theme is applied immediately
-- **And** the preference overrides the system theme
-
-#### Scenario: User toggles between themes
-- **Given** a theme is currently active
-- **When** the user clicks the theme toggle button
-- **Then** the theme switches to the other option (light ↔ dark)
-- **And** the transition is smooth and animated
-
-### Requirement: Theme persistence
-
-The system SHALL persist the user's theme choice across sessions.
-
-#### Scenario: Theme preference is saved
-- **Given** a user manually selects a theme
-- **When** the selection is made
-- **Then** the preference is saved to localStorage
-
-#### Scenario: Theme preference persists across page refreshes
-- **Given** a user has manually selected a theme
-- **When** the user refreshes the page
-- **Then** the manually selected theme is applied
-- **And** the system preference is ignored
-
-#### Scenario: Theme preference persists across different pages
-- **Given** a user has manually selected a theme on the homepage
-- **When** the user navigates to a game page
-- **Then** the manually selected theme is applied on the game page
-- **And** the theme remains consistent across all pages
-
-#### Scenario: Theme preference persists across sessions
-- **Given** a user has manually selected a theme
-- **When** the user closes and reopens the browser
-- **Then** the manually selected theme is applied on return
-- **And** the preference is remembered until changed
-
-### Requirement: Theme toggle control
-
-The system SHALL provide a theme toggle button on all pages.
-
-#### Scenario: Theme toggle button is visible
-- **Given** a user is on any page (homepage or game page)
-- **When** the page loads
-- **Then** a theme toggle button is visible in the header
-- **And** the button shows an icon indicating the current theme (sun for light, moon for dark)
-
-#### Scenario: Theme toggle button is accessible
-- **Given** a theme toggle button is displayed
-- **When** the user navigates with keyboard
-- **Then** the button can be focused with Tab key
-- **And** the button can be activated with Enter or Space key
-- **And** the button has an appropriate ARIA label
-
-### Requirement: Smooth theme transitions
-
-The system SHALL apply smooth transitions when switching themes.
-
-#### Scenario: Theme switch animates smoothly
-- **Given** a user clicks the theme toggle button
-- **When** the theme changes
-- **Then** background and text colors transition smoothly over 300ms
-- **And** the transition feels polished and intentional
-
-#### Scenario: No flash on page load
-- **Given** a user visits any page
-- **When** the page loads
-- **Then** the correct theme is applied immediately
-- **And** no flash of unstyled content or wrong theme occurs
+#### Scenario: Mute state persists across sessions
+- **WHEN** a user toggles the mute button
+- **THEN** the mute state is saved to localStorage with key 'games_sound_muted'
+- **AND** the mute state is restored on subsequent page loads
+- **AND** the mute state is consistent across all pages and games
 
