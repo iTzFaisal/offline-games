@@ -1,0 +1,165 @@
+# Implementation Tasks
+
+## 1. Pong Game - Foundation
+
+- [x] 1.1 Create games/pong.html with 400x400 canvas, score display, and controls
+- [x] 1.2 Create js/games/pong.js extending BaseGame with highscore mode
+- [x] 1.3 Implement paddle rendering (left and right, 60px high, 10px wide)
+- [x] 1.4 Implement ball rendering (10px circle)
+- [x] 1.5 Implement paddle movement (W/S for left, Arrow keys for right, touch drag)
+- [x] 1.6 Implement paddle boundary constraints (can't go off canvas)
+- [x] 1.7 Implement ball physics (constant X/Y velocity, wall bouncing)
+- [x] 1.8 Implement ball-paddle collision detection
+- [x] 1.9 Implement ball angle change based on paddle hit position
+- [x] 1.10 Implement ball speed increase on paddle hit (5% per hit)
+- [x] 1.11 Implement scoring when ball passes paddle edge
+- [x] 1.12 Implement ball reset after score (center, launch toward scorer)
+- [x] 1.13 Implement game end at 10 points
+- [x] 1.14 Implement AI opponent with three difficulty levels (Easy/Medium/Hard)
+- [x] 1.15 Implement AI paddle movement (tracks ball with reaction delay)
+- [x] 1.16 Implement 2-player local mode (W/S vs Arrow keys)
+- [x] 1.17 Add game mode selector (1P vs 2P) and difficulty selector
+- [x] 1.18 Implement pause functionality (Space bar, "PAUSED" message)
+- [x] 1.19 Add Restart button functionality
+- [x] 1.20 Add sound effects (paddle hit, wall bounce, score, game over) to SoundManager
+- [x] 1.21 Update score display in real-time (left player, right player/AI, high score)
+- [x] 1.22 Add Pong entry to gameRegistry in js/main.js
+- [x] 1.23 Test Pong keyboard controls and AI difficulty levels
+- [x] 1.24 Test Pong touch controls on mobile
+- [x] 1.25 Verify high score persistence across page refreshes
+
+## 2. Breakout Game - Paddle Extension
+
+- [x] 2.1 Create games/breakout.html with 400x400 canvas and game UI
+- [x] 2.2 Create js/games/breakout.js extending BaseGame with highscore mode
+- [x] 2.3 Implement paddle rendering (80px wide, 10px high, bottom center)
+- [x] 2.4 Implement ball rendering (8px circle)
+- [x] 2.5 Implement paddle controls (Arrow keys, A/D, touch drag)
+- [x] 2.6 Reuse paddle boundary logic from Pong
+- [x] 2.7 Implement brick grid rendering (5 rows x 8 columns, 40px bricks)
+- [x] 2.8 Implement brick colors (red, orange, yellow, green, blue by row)
+- [x] 2.9 Implement ball physics with wall bouncing
+- [x] 2.10 Implement ball-paddle collision with angle deflection
+- [x] 2.11 Implement ball-brick collision detection
+- [x] 2.12 Implement brick destruction on hit
+- [x] 2.13 Implement scoring by brick color (10/20/30/40/50 points)
+- [x] 2.14 Implement level progression when all bricks destroyed
+- [x] 2.15 Implement ball speed increase per level (10%)
+- [x] 2.16 Implement different brick patterns per level
+- [x] 2.17 Implement multi-hit bricks (take 2-3 hits, change color)
+- [x] 2.18 Implement lives system (3 lives, display remaining)
+- [x] 2.19 Implement ball loss at bottom edge
+- [x] 2.20 Implement ship/ball reset after losing life
+- [x] 2.21 Implement game over when no lives remain
+- [x] 2.22 Implement power-up spawning (20% chance on brick destroy)
+- [x] 2.23 Implement power-up falling physics
+- [x] 2.24 Implement wide paddle power-up (green, 2x width for 10s)
+- [x] 2.25 Implement multi-ball power-up (blue, 2 extra balls)
+- [x] 2.26 Implement laser power-up (red, Space to fire for 15s)
+- [x] 2.27 Implement power-up collection (paddle collision)
+- [x] 2.28 Implement power-up expiration timers and visual indicators
+- [x] 2.29 Implement pause functionality (Space bar toggle)
+- [x] 2.30 Add Restart button functionality
+- [x] 2.31 Add sound effects (brick break, paddle hit, power-up, life lost) to SoundManager
+- [x] 2.32 Update score display (score, level, high score, lives)
+- [x] 2.33 Add Breakout entry to gameRegistry in js/main.js
+- [x] 2.34 Test power-ups and multi-ball mechanics
+- [x] 2.35 Verify level progression and brick patterns
+
+## 3. Space Invaders Game - Fixed Shooter Pattern
+
+- [x] 3.1 Create games/invaders.html with 400x400 canvas and game UI
+- [x] 3.2 Create js/games/invaders.js extending BaseGame with highscore mode
+- [x] 3.3 Implement player ship rendering (30px wide, centered at bottom)
+- [x] 3.4 Implement ship controls (Arrow keys, A/D, touch left/right sides)
+- [x] 3.5 Implement ship boundary constraints (can't leave canvas)
+- [x] 3.6 Implement bullet rendering (3px wide, 10px tall)
+- [x] 3.7 Implement shooting (Space bar, one bullet at a time)
+- [x] 3.8 Implement alien formation rendering (5 rows x 11 columns)
+- [x] 3.9 Implement alien types by row (squid 30pts, crab 20pts, octopus 10pts)
+- [x] 3.10 Implement alien animation (2 sprite frames, alternating on move)
+- [x] 3.11 Implement alien formation movement (horizontal, then drop at edge)
+- [x] 3.12 Implement alien speed increase as aliens are destroyed
+- [x] 3.13 Implement alien shooting (bottom row fires randomly)
+- [x] 3.14 Implement alien bullet rendering and collision detection
+- [x] 3.15 Implement 4 bunker rendering (40px wide, 20px high, each with 3 segments)
+- [x] 3.16 Implement bunker destruction (3 hits per section to destroy)
+- [x] 3.17 Implement alien-bunker collision (destroys entire bunker)
+- [x] 3.18 Implement bullet-bunker collision (damage section)
+- [x] 3.19 Implement player-alien bullet collision (lose life)
+- [x] 3.20 Implement player-alien collision (game over immediately)
+- [x] 3.21 Implement alien destruction scoring (10/20/30 points)
+- [x] 3.22 Implement mystery UFO spawning (every 20-30s)
+- [x] 3.23 Implement UFO movement and rendering
+- [x] 3.24 Implement UFO destruction (random 50-200 bonus points)
+- [x] 3.25 Implement wave progression when all aliens destroyed
+- [x] 3.26 Implement wave difficulty (aliens start lower, fire faster)
+- [x] 3.27 Implement lives system (3 lives, ship icons display)
+- [x] 3.28 Implement ship respawn with invincibility (blinking, 2s)
+- [x] 3.29 Implement game over when lives depleted or aliens reach player
+- [x] 3.30 Implement pause functionality (P key toggle)
+- [x] 3.31 Add Restart button functionality (restore bunkers)
+- [x] 3.32 Add sound effects (shot, alien move, explosion, UFO siren) to SoundManager
+- [x] 3.33 Update score display (score, wave, high score, lives)
+- [x] 3.34 Implement score popup on alien death (floating numbers)
+- [x] 3.35 Add Space Invaders entry to gameRegistry in js/main.js
+- [x] 3.36 Test all alien behaviors and wave progression
+- [x] 3.37 Verify bunker destruction mechanics
+
+## 4. Asteroids Game - Vector Physics
+
+- [x] 4.1 Create games/asteroids.html with 400x400 canvas and game UI
+- [x] 4.2 Create js/games/asteroids.js extending BaseGame with highscore mode
+- [x] 4.3 Implement ship rendering (vector triangle, 20px size)
+- [x] 4.4 Implement ship rotation (Left/Right arrows or A/D)
+- [x] 4.5 Implement ship thrust (Up arrow or W, flame effect)
+- [x] 4.6 Implement ship momentum and friction physics
+- [x] 4.7 Implement screen wrapping for ship (wrap around edges)
+- [x] 4.8 Implement bullet rendering (line segment, 5px long)
+- [x] 4.9 Implement shooting (Space bar, 4 bullet max on screen)
+- [x] 4.10 Implement bullet expiration (2 seconds or on hit)
+- [x] 4.11 Implement asteroid rendering (vector polygons, jagged shapes)
+- [x] 4.12 Implement asteroid spawning (4 large at level start, random positions)
+- [x] 4.13 Implement asteroid movement (random velocity, rotation)
+- [x] 4.14 Implement asteroid screen wrapping
+- [x] 4.15 Implement large→medium splitting (2 medium asteroids)
+- [x] 4.16 Implement medium→small splitting (2 small asteroids)
+- [x] 4.17 Implement small asteroid destruction
+- [x] 4.18 Implement bullet-asteroid collision detection
+- [x] 4.19 Implement ship-asteroid collision detection
+- [x] 4.20 Implement ship destruction (debris particles, sound)
+- [x] 4.21 Implement ship respawn (center, 2s delay, 3s invincibility)
+- [x] 4.22 Implement scoring (large 20pts, medium 50pts, small 100pts)
+- [x] 4.23 Implement extra life at 10,000 points
+- [x] 4.24 Implement level progression when all asteroids destroyed
+- [x] 4.25 Implement level difficulty (more asteroids, faster speed)
+- [x] 4.26 Implement UFO enemy spawning (every 30s)
+- [x] 4.27 Implement UFO movement and shooting
+- [x] 4.28 Implement UFO destruction (random 100-500 bonus points)
+- [x] 4.29 Implement lives system (3 lives, display remaining)
+- [x] 4.30 Implement game over when lives depleted
+- [x] 4.31 Implement pause functionality (P key toggle)
+- [x] 4.32 Add Restart button functionality
+- [x] 4.33 Implement mobile touch controls (rotate, thrust, fire buttons)
+- [x] 4.34 Add sound effects (thrust, shoot, explosion, UFO) to SoundManager
+- [x] 4.35 Update score display (score, level, high score, lives)
+- [x] 4.36 Add Asteroids entry to gameRegistry in js/main.js
+- [x] 4.37 Test vector physics and screen wrapping
+- [x] 4.38 Verify asteroid splitting and collision detection
+
+## 5. Integration & Polish
+
+- [x] 5.1 Add game-specific styles for all 4 games to css/games.css
+- [x] 5.2 Verify all games use retro theme consistently
+- [x] 5.3 Test all games on Chrome desktop
+- [ ] 5.4 Test all games on Firefox desktop
+- [ ] 5.5 Test all games on Safari desktop
+- [x] 5.6 Test all games on iOS Safari mobile (touch controls)
+- [x] 5.7 Test all games on Android Chrome mobile (touch controls)
+- [x] 5.8 Verify sound effects work across all games
+- [x] 5.9 Verify mute toggle works on all game pages
+- [x] 5.10 Verify high score persistence for all games
+- [x] 5.11 Verify accessibility (keyboard nav, ARIA labels, focus)
+- [x] 5.12 Performance test all games (60fps rendering)
+- [x] 5.13 Update README.md with new game descriptions
+- [x] 5.14 Update CLAUDE.md with any new patterns or conventions

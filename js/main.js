@@ -14,6 +14,30 @@ const gameRegistry = {
         name: 'Snake',
         description: 'Guide the snake to eat food and grow longer. Avoid walls and yourself! 10 levels of increasing difficulty.',
         path: 'games/snake.html'
+    },
+    pong: {
+        id: 'pong',
+        name: 'Pong',
+        description: 'Classic paddle game! Play against AI or a friend locally. First to 10 wins!',
+        path: 'games/pong.html'
+    },
+    breakout: {
+        id: 'breakout',
+        name: 'Breakout',
+        description: 'Break all the bricks! Collect power-ups and advance through levels in this classic arcade game.',
+        path: 'games/breakout.html'
+    },
+    invaders: {
+        id: 'invaders',
+        name: 'Space Invaders',
+        description: 'Defend Earth from waves of descending aliens. Destroy them all before they reach your planet!',
+        path: 'games/invaders.html'
+    },
+    asteroids: {
+        id: 'asteroids',
+        name: 'Asteroids',
+        description: 'Navigate your ship through space and destroy asteroids before they destroy you. Watch out for UFOs!',
+        path: 'games/asteroids.html'
     }
 };
 

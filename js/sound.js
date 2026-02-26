@@ -221,6 +221,116 @@ const SoundManager = (function() {
                     createOscillator('sawtooth', 100, audioContext.currentTime, 0.15, 0.01, 0.1);
                 }
             }, 300);
+        },
+
+        // Pong-specific Sounds
+        'pong-hit': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('square', 440, audioContext.currentTime, 0.05, 0.005, 0.02);
+        },
+
+        'pong-wall': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('sine', 220, audioContext.currentTime, 0.05, 0.005, 0.02);
+        },
+
+        'pong-score': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            playFrequencyRamp(220, 440, 0.15, 'triangle');
+        },
+
+        // Breakout-specific Sounds
+        'brick-break': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('square', 800, audioContext.currentTime, 0.05, 0.005, 0.02);
+            setTimeout(() => {
+                if (!isMuted) createOscillator('square', 600, audioContext.currentTime, 0.03, 0.005, 0.02);
+            }, 30);
+        },
+
+        'paddle': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('sine', 300, audioContext.currentTime, 0.05, 0.005, 0.02);
+        },
+
+        'powerup': () => {
+            if (isMuted) return;
+            playFrequencyRamp(440, 880, 0.2, 'sine');
+        },
+
+        'life-lost': () => {
+            if (isMuted) return;
+            playFrequencyRamp(440, 220, 0.3, 'triangle');
+        },
+
+        'shoot': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('square', 1200, audioContext.currentTime, 0.03, 0.005, 0.01);
+        },
+
+        // Space Invaders-specific Sounds
+        'alien-move': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('triangle', 110, audioContext.currentTime, 0.05, 0.01, 0.02);
+        },
+
+        'ufo': () => {
+            if (isMuted) return;
+            // Rising siren sound
+            playFrequencyRamp(440, 880, 0.3, 'sine');
+            setTimeout(() => {
+                if (!isMuted) playFrequencyRamp(880, 440, 0.3, 'sine');
+            }, 300);
+        },
+
+        'explosion': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            // Noise-like effect using multiple oscillators
+            createOscillator('sawtooth', 200, audioContext.currentTime, 0.15, 0.01, 0.1);
+            createOscillator('square', 150, audioContext.currentTime, 0.15, 0.01, 0.1);
+        },
+
+        // Asteroids-specific Sounds
+        'asteroids-shoot': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            createOscillator('square', 1200, audioContext.currentTime, 0.03, 0.005, 0.01);
+        },
+
+        'asteroids-explode': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            // White noise-like explosion
+            createOscillator('sawtooth', 100, audioContext.currentTime, 0.2, 0.01, 0.15);
+            setTimeout(() => {
+                if (!isMuted) {
+                    createOscillator('square', 80, audioContext.currentTime, 0.15, 0.01, 0.1);
+                }
+            }, 50);
+        },
+
+        'asteroids-thrust': () => {
+            if (isMuted) return;
+            ensureContextRunning();
+            // Low rumble for thrust (continuous while thrusting)
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(60, audioContext.currentTime);
+            gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+            osc.connect(gain);
+            gain.connect(masterGain);
+            osc.start();
+            osc.stop(audioContext.currentTime + 0.05);
         }
     };
 

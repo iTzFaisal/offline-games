@@ -1,12 +1,13 @@
 # Offline Games Website
 
-A simple, lightweight website for playing offline games directly in your browser. No internet connection required after the initial page load.
+A retro arcade-themed collection of classic games that run entirely in your browser. No internet connection required after the initial page load. Features a nostalgic neon aesthetic with authentic arcade gameplay.
 
 ## Tech Stack
 
-- **HTML5** - Semantic markup
-- **CSS3** - Responsive design with CSS Grid and Flexbox
+- **HTML5 Canvas** - Hardware-accelerated game rendering
+- **CSS3** - Retro arcade theme with CSS Grid and Flexbox
 - **Vanilla JavaScript (ES6+)** - No frameworks, pure JavaScript
+- **Web Audio API** - Procedural sound generation (no external audio files)
 
 ## Project Structure
 
@@ -14,16 +15,26 @@ A simple, lightweight website for playing offline games directly in your browser
 /
 ├── index.html              # Homepage with game library
 ├── css/
-│   ├── main.css           # Global styles and theme variables
+│   ├── main.css           # Global styles and retro theme variables
 │   └── games.css          # Game-specific styles
 ├── js/
 │   ├── main.js            # Homepage logic and game registry
-│   ├── theme.js           # Theme management module
+│   ├── sound.js           # Procedural audio manager
 │   └── games/
 │       ├── base.js        # Base game class with score tracking
-│       └── tictactoe.js   # Tic-Tac-Toe game implementation
+│       ├── tictactoe.js   # Tic-Tac-Toe game
+│       ├── snake.js       # Snake game
+│       ├── pong.js        # Pong game
+│       ├── breakout.js    # Breakout game
+│       ├── invaders.js    # Space Invaders game
+│       └── asteroids.js   # Asteroids game
 └── games/
-    └── tictactoe.html     # Tic-Tac-Toe game page
+    ├── tictactoe.html     # Tic-Tac-Toe game page
+    ├── snake.html         # Snake game page
+    ├── pong.html          # Pong game page
+    ├── breakout.html      # Breakout game page
+    ├── invaders.html      # Space Invaders game page
+    └── asteroids.html     # Asteroids game page
 ```
 
 ## How to Run
@@ -96,39 +107,57 @@ const gameRegistry = {
 - **AI Difficulties**: Easy, Medium, Hard (unbeatable minimax)
 - **Features**: Score tracking, responsive design, keyboard accessible
 
-## Theme Support
+### Snake
+- **Gameplay**: Guide the snake to eat food and grow longer
+- **Features**: 10 levels of increasing difficulty, bonus food, obstacles
+- **Controls**: Arrow keys or WASD, swipe gestures on mobile
 
-The website supports both light and dark themes with automatic system preference detection:
+### Pong
+- **Gameplay**: Classic paddle game - first to 10 points wins
+- **Modes**: 1 Player (vs AI) or 2 Players (local)
+- **AI Difficulties**: Easy, Medium, Hard with realistic paddle physics
+- **Features**: Ball angle deflection based on paddle hit position
+
+### Breakout
+- **Gameplay**: Break all the bricks with the bouncing ball
+- **Features**: Power-ups (wide paddle, multi-ball, laser), multi-hit bricks
+- **Progression**: Multiple levels with increasing ball speed and different brick patterns
+- **Controls**: Arrow keys, A/D, or touch drag
+
+### Space Invaders
+- **Gameplay**: Defend Earth from waves of descending alien invaders
+- **Features**: Destructible bunkers, mystery UFO bonus rounds, wave progression
+- **Alien Types**: 3 types with different point values (10, 20, 30 points)
+- **Controls**: Arrow keys or A/D to move, Space to shoot
+
+### Asteroids
+- **Gameplay**: Navigate space and destroy asteroids with your ship
+- **Features**: Vector-style graphics, screen wrapping, asteroid splitting mechanics
+- **Progression**: Multiple levels with more asteroids and UFO enemies
+- **Controls**: Arrow keys or WASD for rotation/thrust, Space to fire
+
+## Retro Arcade Theme
+
+The website features a permanent retro arcade aesthetic inspired by classic 80s arcade cabinets:
 
 ### Theme Features
-- **System Preference**: Automatically detects and applies your OS theme (light/dark mode)
-- **Manual Override**: Click the theme toggle button (sun/moon icon) in the header to switch themes
-- **Persistence**: Your theme choice is saved and remembered across sessions
-- **Smooth Transitions**: Animated theme switching for a polished experience
+- **Neon Colors**: Magenta, cyan, neon green, yellow, and arcade red
+- **Pixel Fonts**: Press Start 2P for headings, VT323 for body text
+- **Glow Effects**: CSS box-shadows create authentic neon glow
+- **Dark Background**: Deep arcade black/blue-black color scheme
+- **Mute Button**: Toggle sound effects on/off (persisted across sessions)
 
-### Adding More Themes
-
-To add custom themes beyond light/dark:
-
-1. **Define CSS Variables** in `css/main.css`:
-```css
-:root[data-theme="custom"] {
-    --primary-color: #your-color;
-    --background-start: #your-bg;
-    /* ... other variables */
-}
-```
-
-2. **Update Theme Manager** in `js/theme.js`:
-   - Add theme option to the toggle logic
-   - Update icons/labels as needed
-
-3. **Test the new theme** across all pages
+### Visual Elements
+- Canvas-based games with vector-style rendering
+- Animated UI elements with retro color palette
+- Responsive design that maintains arcade aesthetic on all devices
 
 ## Score Storage
 
-Scores are stored in `localStorage` with the key format `games_scores_<gameId>`:
+Scores are stored in `localStorage` with two different modes:
 
+### Competitive Mode (Tic-Tac-Toe)
+Key: `games_scores_<gameId>`
 ```javascript
 {
   wins: 0,
@@ -138,6 +167,12 @@ Scores are stored in `localStorage` with the key format `games_scores_<gameId>`:
   lastPlayed: "2025-01-24T23:00:00.000Z"
 }
 ```
+
+### High Score Mode (Snake, Pong, Breakout, Space Invaders, Asteroids)
+Key: `games_highscore_<gameId>`
+- Stores single best score
+- Tracks new high scores with visual indicator
+- Persists across page refreshes
 
 ## Browser Support
 

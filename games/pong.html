@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play classic Pong arcade game - bounce the ball past your opponent">
+    <title>Pong | Offline Games</title>
+    <!-- Google Fonts for retro arcade aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <script src="../js/theme.js"></script>
+    <script src="../js/sound.js"></script>
+    <script src="../js/games/base.js"></script>
+    <script src="../js/games/pong.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <button class="mute-toggle" aria-label="Mute sounds" title="Mute sounds">
+                <!-- Speaker icon (unmuted) -->
+                <svg class="icon-unmuted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                </svg>
+                <!-- Muted speaker icon -->
+                <svg class="icon-muted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <line x1="23" y1="9" x2="17" y2="15"/>
+                    <line x1="17" y1="9" x2="23" y2="15"/>
+                </svg>
+            </button>
+            <h1>PONG</h1>
+            <a href="../index.html" class="back-button">Back to Menu</a>
+        </header>
+
+        <!-- Score Display -->
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Player</span>
+                <span class="score-value" id="left-score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Opponent</span>
+                <span class="score-value" id="right-score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">High Score</span>
+                <span class="score-value" id="high-score">0</span>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <div class="game-canvas-container">
+            <canvas id="pong-canvas" width="400" height="400"></canvas>
+        </div>
+
+        <!-- Status Message -->
+        <div class="status-message" id="status-message">
+            Press Space or tap to start
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <div class="control-group">
+                <label for="game-mode">Mode:</label>
+                <select id="game-mode" class="game-select">
+                    <option value="1p">1 Player (vs AI)</option>
+                    <option value="2p">2 Players</option>
+                </select>
+            </div>
+            <div class="control-group" id="difficulty-group">
+                <label for="difficulty">AI:</label>
+                <select id="difficulty" class="game-select">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="restart-btn">Restart</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize game when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the Pong game
+            const pongGame = new PongGame('pong-canvas');
+
+            // Setup mute button
+            const muteButton = document.querySelector('.mute-toggle');
+            if (muteButton) {
+                muteButton.addEventListener('click', () => {
+                    SoundManager.toggleMute();
+                    SoundManager.play('click');
+                });
+                SoundManager.updateMuteButton();
+            }
+
+            // Setup restart button
+            const restartBtn = document.getElementById('restart-btn');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', () => {
+                    SoundManager.play('click');
+                    pongGame.restart();
+                });
+            }
+
+            // Setup game mode selector
+            const modeSelect = document.getElementById('game-mode');
+            const difficultyGroup = document.getElementById('difficulty-group');
+            if (modeSelect) {
+                modeSelect.addEventListener('change', () => {
+                    SoundManager.play('click');
+                    pongGame.setGameMode(modeSelect.value);
+                    // Show/hide difficulty selector
+                    difficultyGroup.style.display = modeSelect.value === '1p' ? 'flex' : 'none';
+                });
+            }
+
+            // Setup difficulty selector
+            const difficultySelect = document.getElementById('difficulty');
+            if (difficultySelect) {
+                difficultySelect.addEventListener('change', () => {
+                    SoundManager.play('click');
+                    pongGame.setDifficulty(difficultySelect.value);
+                });
+            }
+
+            // Add hover sounds to buttons
+            const buttons = document.querySelectorAll('button, .back-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    SoundManager.play('hover');
+                });
+            });
+
+            // Handle canvas responsive scaling
+            function resizeCanvas() {
+                const canvas = document.getElementById('pong-canvas');
+                const container = document.querySelector('.game-canvas-container');
+                const maxWidth = Math.min(400, window.innerWidth - 32);
+                const scale = maxWidth / 400;
+
+                canvas.style.width = `${maxWidth}px`;
+                canvas.style.height = `${maxWidth}px`;
+            }
+
+            // Initial resize and listen for window changes
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+        });
+    </script>
+</body>
+</html>
